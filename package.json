@@ -1,0 +1,12 @@
+{
+  "name": "ml",
+  "version": "1.0.0",
+  "description": "",
+  "main": "btc-data.js",
+  "author": "Diego Barahona",
+  "license": "ISC",
+  "dependencies": {
+    "node.bittrex.api": "dparlevliet/node.bittrex.api",
+    "rxjs": "^5.4.3"
+  }
+}
