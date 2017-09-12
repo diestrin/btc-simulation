@@ -216,9 +216,9 @@ nan@^2.3.3:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.7.0.tgz#d95bf721ec877e08db276ed3fc6eb78f9083ad46"
 
-node.bittrex.api@dparlevliet/node.bittrex.api:
+node-bittrex-api@^0.7.4:
   version "0.7.4"
-  resolved "https://codeload.github.com/dparlevliet/node.bittrex.api/tar.gz/0eb49b1dfb2ec2570dfd55fa525e9a8f1a1b303f"
+  resolved "https://registry.yarnpkg.com/node-bittrex-api/-/node-bittrex-api-0.7.4.tgz#695a2cd2a6116fd31e361c2e77bb368426c51791"
   dependencies:
     cloudscraper "^1.4.1"
     jsonic "^0.3.0"

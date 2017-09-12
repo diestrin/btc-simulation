@@ -1,5 +1,5 @@
 const { Observable, ReplaySubject } = require('rxjs');
-const bittrex = require('node.bittrex.api');
+const bittrex = require('node-bittrex-api');
 
 // Bittrex fee 0.25%
 const feeRate = 0.0025;
@@ -10,14 +10,16 @@ const btcToUse = parseFloat(process.argv[2]);
 // Target Market
 const market = process.argv[3];
 
+console.log('Using', btcToUse, 'btc to trade in market', market,
+  'with a variance of', variance * 100, '%');
+
 bittrex.options({
   apikey: process.env.BITTREX_API_KEY,
-  apisecret: process.env.BITTREX_API_SECRET,
-  verbose: true
+  apisecret: process.env.BITTREX_API_SECRET
 });
 
 const updates$ = Observable
-  //*
+  /*
   .empty();
   /*/
   // Convert event to observable
@@ -90,27 +92,40 @@ updates$
     console.log('New mean base', Math.round((delta.Bid + delta.Ask) / 2)));
 
 function ask(amount) {
-  const operation = btcBalance / amount;
-  const fee = operation / feeRate;
+  const operation = btcBalance * amount;
+  const fee = operation * feeRate / amount;
 
   targetBalance = operation - fee;
-  
-  console.log('Trading', btcBalance, 'btc asking', amount);
-  console.log('Got', targetBalance, 'paying a fee of', fee);
-  
   fees += fee;
+  
+  console.log('\n--------');
+  console.log('Trading', btcBalance, 'btc asking', amount);
+  console.log('Got', targetBalance, 'paying a fee of', fee, 'btc');
+  report(amount);
+  console.log('--------\n');
+  
   btcBalance = 0;
 }
 
 function bid(amount) {
   const operation = targetBalance / amount;
-  const fee = operation / feeRate;
+  const fee = operation * feeRate;
   
   btcBalance = operation - fee;
-  
-  console.log('Trading', targetBalance, 'bidding', amount);
-  console.log('Got', btcBalance, 'btc paying a fee of', fee);
-
   fees += fee;
+  
+  console.log('\n--------');
+  console.log('Trading', targetBalance, 'bidding', amount);
+  console.log('Got', btcBalance, 'btc paying a fee of', fee, 'btc');
+  report(amount);
+  console.log('--------\n');
+  
   targetBalance = 0;
+}
+
+function report(amount) {
+  const totalFees = Math.round(fees * 5000) / 5000;
+  const profit = Math.round((btcBalance - btcToUse) * 5000) / 5000;
+  console.log('Total fees paid', totalFees, '(', totalFees * amount, ')');
+  profit && console.log('Profit', profit, '(', profit * amount, ')');
 }
