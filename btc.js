@@ -142,6 +142,8 @@ function report(amount, final) {
   const profit = round(btcBalance - args.btc, btcPrecision);
   console.log('Total fees paid', totalFees);
   console.log('Total Profit', profit);
+
+  final && process.exit();
 }
 
 function round(amount, precision) {
@@ -170,9 +172,10 @@ function getRealData() {
     // Filter updates for the target market only
     .filter(delta => delta.MarketName === args.market)
     .map(delta => ({
-      bid: round(delta.bid, targetPrecision),
-      ask: round(delta.ask, targetPrecision)
+      bid: round(delta.Bid, targetPrecision),
+      ask: round(delta.Ask, targetPrecision)
     }))
+    .do(console.log)
     .distinctUntilChanged((prev, next) =>
       prev.bid === next.bid && prev.ask === next.ask);
 }
