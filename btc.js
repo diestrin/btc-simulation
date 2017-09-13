@@ -175,7 +175,6 @@ function getRealData() {
       bid: round(delta.Bid, targetPrecision),
       ask: round(delta.Ask, targetPrecision)
     }))
-    .do(console.log)
     .distinctUntilChanged((prev, next) =>
       prev.bid === next.bid && prev.ask === next.ask);
 }
