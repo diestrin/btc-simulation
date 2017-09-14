@@ -10,7 +10,6 @@ const args = program
   .option('-m, --market <str>', 'Name of the market to trade, for real only')
   .option('-M, --mock <list>', 'List of mock symbols to use, for mock only i.e.: +-+-', val => val.split(''))
   .option('-p, --price <n>', 'Initial BTC price, for mock and random only', Number)
-  .option('-p, --price <n>', 'Initial BTC price, for mock and random only', Number)
   .option('-i, --iterations <n>', 'Number of events to randomly create, for random only', Number)
   .parse(process.argv);
   
