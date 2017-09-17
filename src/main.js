@@ -7,6 +7,7 @@ const { summary } = require('./reports');
 const { real$ } = require('./data-source/real');
 const emulate = require('./emulations/percent-variance');
 const { mock$, random$ } = require('./data-source/mock-random');
+require('./stadistics/candles');
 
 bittrex.options({
   apikey: process.env.BITTREX_API_KEY,
