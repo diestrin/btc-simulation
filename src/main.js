@@ -1,11 +1,18 @@
 #!/usr/bin/env node
 const program = require('commander');
 const { Observable } = require('rxjs');
+const bittrex = require('node-bittrex-api');
 
 const { summary } = require('./reports');
 const { real$ } = require('./data-source/real');
 const emulate = require('./emulations/percent-variance');
 const { mock$, random$ } = require('./data-source/mock-random');
+
+bittrex.options({
+  apikey: process.env.BITTREX_API_KEY,
+  apisecret: process.env.BITTREX_API_SECRET,
+  inverse_callback_arguments: true
+});
 
 program
   .command('real')

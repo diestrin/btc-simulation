@@ -1,13 +1,8 @@
-const bittrex = require('node-bittrex-api');
 const { Observable } = require('rxjs');
+const bittrex = require('node-bittrex-api');
 
 const { market } = require('../config');
 const { marketUpdate } = require('../reports');
-
-bittrex.options({
-  apikey: process.env.BITTREX_API_KEY,
-  apisecret: process.env.BITTREX_API_SECRET
-});
 
 /**
  * EXAMPLE VALUES FROM OPERATION
