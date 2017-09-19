@@ -2,16 +2,20 @@
   "name": "ml",
   "version": "1.0.0",
   "description": "",
-  "main": "btc-data.js",
+  "main": "src/main.js",
   "author": "Diego Barahona",
   "license": "ISC",
   "scripts": {
-    "emulate": "node ./btc.js",
+    "emulate": "node ./src/main.js",
+    "cleanup": "rimraf ./reports/*",
     "start": "yarn install && yarn emulate --"
   },
   "dependencies": {
     "commander": "^2.11.0",
     "node-bittrex-api": "^0.7.4",
     "rxjs": "^5.4.3"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2"
   }
 }
