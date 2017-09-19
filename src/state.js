@@ -39,12 +39,12 @@ const actions = {
 
     transaction({
       isBid: true,
-      tradeRate, result, feeInBase,
+      tradeRate, result, fee,
       balance: state.balance.target
     });
 
     return Object.assign({}, state, {
-      fees: state.fees + feeInBase,
+      fees: state.fees + fee,
       balance: { target: result, base: 0 }
     });
   },
