@@ -39,7 +39,7 @@ const actions = {
 
     transaction({
       isBid: true,
-      tradeRate, result, fee,
+      tradeRate, result, fee: feeInBase,
       balance: state.balance.target
     });
 
